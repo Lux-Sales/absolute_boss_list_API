@@ -1,0 +1,45 @@
+version: "3"
+services:
+  list_postgres:
+    image: postgres:latest
+    container_name: list_postgres
+    volumes:
+      - ./.ignore/postgres/postgres:/var/lib/postgresql/data
+    networks:
+      - list_network
+    environment: 
+      - POSTGRES_NAME=absolutedb
+      - POSTGRES_PASSWORD=listdb
+      - POSTGRES_USER=list
+      - POSTGRES_DB=absolutedb
+
+  list_api:
+    build: .
+    container_name: list_api
+    networks: 
+      - list_network
+    ports:
+      - "8000:8000"
+    volumes:
+      - .:/code
+    depends_on: 
+      - list_postgres
+
+  list_pgadmin:
+    image: dpage/pgadmin4
+    container_name: list_pgadmin
+    ports: 
+      - "5433:80"
+    environment:
+      - PGADMIN_DEFAULT_EMAIL=sales_l@hotmail.com
+      - PGADMIN_DEFAULT_PASSWORD=absolutedb
+    # volumes: 
+    #   - ./.ignore/var/lib/pgadmin:/var/lib/pgadmin
+    networks:
+      - list_network
+    logging: 
+      driver: none      
+
+networks: 
+  list_network:
+    driver: bridge          
