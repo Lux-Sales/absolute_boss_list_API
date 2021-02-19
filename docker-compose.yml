@@ -12,6 +12,9 @@ services:
       - POSTGRES_PASSWORD=listdb
       - POSTGRES_USER=list
       - POSTGRES_DB=absolutedb
+      - POSTGRES_HOST=list_postgres
+      - SECRET_KEY=ab6787d89b9053db5ca8cf44f2ecce095587ab949a90df53
+      - DEBUG=True
 
   list_api:
     build: .
@@ -24,6 +27,15 @@ services:
       - .:/code
     depends_on: 
       - list_postgres
+    environment: 
+      - ENVIRONMENT=DEVELOPMENT
+      - POSTGRES_NAME=absolutedb
+      - POSTGRES_PASSWORD=listdb
+      - POSTGRES_USER=list
+      - POSTGRES_DB=absolutedb
+      - POSTGRES_HOST=list_postgres
+      - SECRET_KEY=chavealeatorio
+      - DEBUG=True
 
   list_pgadmin:
     image: dpage/pgadmin4

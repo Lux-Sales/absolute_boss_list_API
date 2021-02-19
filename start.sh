@@ -2,14 +2,15 @@
 echo "Esperando o banco de dados conectar"
 postgres_ready() {
 python3 << END
+import os
 import sys
 import psycopg2
 try:
     conn = psycopg2.connect(
-      dbname='absolutedb',
-      user='list',
-      password='listdb',
-      host='list_postgres'
+      dbname=os.environ.get('POSTGRES_NAME'),
+      user=os.environ.get('POSTGRES_USER'),
+      password=os.environ.get('POSTGRES_PASSWORD'),
+      host=os.environ.get('POSTGRES_HOST')
     )
 except psycopg2.OperationalError:
     sys.exit(-1)
