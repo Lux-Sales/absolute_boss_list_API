@@ -1,1 +1,1 @@
-web: gunicorn list.wsgi
+web gunicorn list.wsgi
