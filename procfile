@@ -1,1 +1,1 @@
-web gunicorn manage.wsgi
+web: gunicorn list_api.list_api.wsgi
