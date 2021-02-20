@@ -31,7 +31,8 @@ ALLOWED_HOSTS = ['*']
 # Application definition
 
 API_APPS = [
-    'users'
+    'players',
+    'boss_list'
 ]
 
 INSTALLED_APPS = [
