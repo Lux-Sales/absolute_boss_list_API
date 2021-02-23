@@ -13,6 +13,12 @@ class AddPlayerSerializer(serializers.Serializer):
         player = Player.objects.create(**validated_data, boss_list=boss_list)
         return player
 
+class DeletePlayerSerializer(serializers.Serializer):
+    name = serializers.CharField(max_length=255, required=True)
+    vocation = serializers.CharField(max_length=255, required=True)
+    team = serializers.CharField(max_length=255, required=True)
+
+
 class BossListSerializer(serializers.ModelSerializer):
     players = PlayersSerializer(many=True, read_only=True)
     
